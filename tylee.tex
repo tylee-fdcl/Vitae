@@ -1,0 +1,1051 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+\usepackage{graphicx,multicol,multirow,url,subfigure,tabularx,times}
+%\usepackage[pdftex,urlcolor=blue,pdfpagemode=none,pdfstartview=FitH]{hyperref}
+\usepackage[breaklinks=true,urlcolor=blue,pdfpagemode=none,pdfstartview=FitH]{hyperref}
+\usepackage{databib}
+\usepackage[anythingbreaks]{breakurl}
+\usepackage{threeparttable,booktabs}
+
+\newcommand{\SO}{\mathsf{SO(3)}}
+\newcommand{\SE}{\mathsf{SE(3)}}
+\newcommand{\Sph}{\mathsf{S}}
+
+%% url smaller font.
+\makeatletter
+\def\url@leostyle{%
+%  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small}}}
+\makeatother
+\urlstyle{leo}
+
+\makeatletter
+\def\bstctlcite{\@ifnextchar[{\@bstctlcite}{\@bstctlcite[@auxout]}}
+\def\@bstctlcite[#1]#2{\@bsphack
+  \@for\@citeb:=#2\do{%
+    \edef\@citeb{\expandafter\@firstofone\@citeb}%
+    \if@filesw\immediate\write\csname #1\endcsname{\string\citation{\@citeb}}\fi}%
+  \@esphack}
+\makeatother
+
+\newif\ifdatabase
+\databasefalse
+\databasetrue % comment this when it takes a long time to compile references
+
+\newif\ifdatabasenew
+\databasenewfalse
+%\databasenewtrue
+
+\newcommand{\DTLformatdoi}[1]{doi:\href{http://dx.doi.org/#1}{#1}}
+\newcommand{\DTLformaturl}[1]{url:\href{#1}{#1}}
+
+\renewcommand*{\DTLformatauthor}[4]{%
+\DTLformatabbrvforenames{#4}
+%\DTLformatforenames{#4}
+\DTLformatvon{#1}%
+\DTLformatsurname{#2}%
+\DTLformatjr{#3}}
+
+\renewcommand*{\DTLformatarticle}{%
+\DTLformatauthorlist
+\DTLifbibfieldexists{Author}{\DTLaddperiod}{}%
+\DTLifbibfieldexists{Title}{%
+\DTLstartsentencespace\DTLbibfield{Title}%
+\DTLcheckbibfieldendsperiod{Title}%
+\DTLaddperiod}{}%
+\DTLifbibfieldexists{CrossRef}{%
+% cross ref field
+\DTLformatarticlecrossref
+\DTLifbibfieldexists{Pages}{\DTLaddcomma}{}%
+\DTLformatpages
+\DTLaddperiod
+}{% no cross ref field
+\DTLifbibfieldexists{Journal}{\DTLstartsentencespace
+{\em\DTLbibfield{Journal}}%
+\DTLcheckbibfieldendsperiod{Journal}%
+\DTLifanybibfieldexists{Number,Volume,Pages,Month,Year}{%
+\DTLaddcomma}{\DTLaddperiod}}{}%
+\DTLformatvolnumpages
+\DTLifanybibfieldexists{Volume,Number,Pages}{%
+\DTLifanybibfieldexists{Year,Month}{\DTLaddcomma}{%
+\DTLaddperiod}%
+\DTLmidsentencefalse}{}%
+\DTLformatdate
+\DTLifanybibfieldexists{Year,Month}{\DTLaddperiod}{}%
+}%
+\DTLifbibfieldexists{Note}{\DTLstartsentencespace\DTLbibfield{Note}%
+\DTLcheckbibfieldendsperiod{Note}%
+\DTLaddperiod}{}%
+\DTLifbibfieldexists{DOI}{\DTLstartsentencespace\DTLformatdoi{\DTLbibfield{DOI}}%
+\DTLcheckbibfieldendsperiod{DOI}%
+\DTLaddperiod}{\DTLifbibfieldexists{URL}{\DTLstartsentencespace\DTLformaturl{\DTLbibfield{URL}}%
+\DTLcheckbibfieldendsperiod{URL}%
+\DTLaddperiod}{}}%
+}
+
+\renewcommand*{\DTLformatinproceedings}{%
+\DTLifbibfieldexists{Author}{\DTLformatauthorlist
+\DTLaddperiod}{}%
+\DTLifbibfieldexists{Title}{%
+\DTLstartsentencespace
+\DTLbibfield{Title}%
+\DTLcheckbibfieldendsperiod{Title}%
+\DTLaddperiod}{}%
+\DTLifbibfieldexists{CrossRef}{%
+% cross ref entry
+\DTLformatincollproccrossref
+\DTLifbibfieldexists{Pages}{\DTLaddcomma}{%
+\DTLaddperiod}%
+\DTLformatpages
+\DTLifbibfieldexists{Pages}{\DTLaddperiod}{}%
+}{% no cross ref
+\DTLformatinedbooktitle
+\DTLifbibfieldexists{BookTitle}{%
+\DTLifanybibfieldexists{Volume,Series,Pages,Number,Address,%
+Month,Year}{%
+\DTLaddcomma}{\DTLaddperiod}}{}%
+\DTLformatbvolume
+\DTLifbibfieldexists{Volume}{%
+\DTLifanybibfieldexists{Number,Series,Pages,Address,Month,Year}{%
+\DTLaddcomma}{\DTLaddperiod}}{}%
+\DTLformatnumberseries
+\DTLifanybibfieldexists{Number,Series}{%
+\DTLifanybibfieldexists{Pages,Address,Month,Year}{%
+\DTLaddcomma}{\DTLaddperiod}}{}%
+\DTLformatpages
+\DTLifbibfieldexists{Pages}{%
+\DTLifanybibfieldexists{Address,Month,Year}{%
+\DTLaddcomma}{\DTLaddperiod}}{}%
+\DTLifbibfieldexists{Address}{%
+\DTLstartsentencespace
+\DTLbibfield{Address}%
+\DTLcheckbibfieldendsperiod{Address}%
+\DTLifanybibfieldexists{Month,Year}{\DTLaddcomma}{%
+\DTLaddperiod}%
+\DTLformatdate
+\DTLifanybibfieldexists{Month,Year}{\DTLaddperiod}{}%
+\DTLifbibfieldexists{Organization}{%
+\DTLstartsentencespace
+\DTLbibfield{Organization}%
+\DTLcheckbibfieldendsperiod{Organization}%
+\DTLifbibfieldexists{Publisher}{\DTLaddcomma}{%
+\DTLaddperiod}}{}%
+\DTLifbibfieldexists{Publisher}{%
+\DTLstartsentencespace
+\DTLbibfield{Publisher}%
+\DTLcheckbibfieldendsperiod{Publisher}%
+\DTLaddperiod}{}%
+}{%
+\DTLifanybibfieldexists{Publisher,Organization}{%
+\DTLaddperiod}{}%
+\DTLifbibfieldexists{Organization}{%
+\DTLstartsentencespace
+\DTLbibfield{Organization}%
+\DTLcheckbibfieldendsperiod{Organization}%
+\DTLifanybibfieldexists{Publisher,Month,Year}{%
+\DTLaddcomma}{}}{}%
+\DTLifbibfieldexists{Publisher}{%
+\DTLstartsentencespace
+\DTLbibfield{Publisher}%
+\DTLcheckbibfieldendsperiod{Publisher}%
+\DTLifanybibfieldexists{Month,Year}{\DTLaddcomma}{%
+\DTLaddperiod}}{}%
+\DTLformatdate
+\DTLifanybibfieldexists{Month,Year}{\DTLaddperiod}{}%
+}%
+}%
+\DTLifbibfieldexists{Note}{%
+\DTLstartsentencespace
+\DTLbibfield{Note}%
+\DTLcheckbibfieldendsperiod{Note}%
+\DTLaddperiod}{}%
+\DTLifbibfieldexists{Url}{\DTLstartsentencespace\DTLformaturl{\DTLbibfield{Url}}%
+\DTLcheckbibfieldendsperiod{Url}%
+\DTLaddperiod}{}%
+}
+
+\begin{document}
+\allowdisplaybreaks
+
+%\DTLbibliographystyle{abbrv}
+\nocite{*}    
+\DTLloadbbl{mybib}{../tylee}
+\ifdatabase
+%\DTLloadbbl{mybib}{../tylee}
+\DTLsettabseparator
+\DTLsavedb{mybib}{tylee_db.txt}
+%\DTLloaddb{mybib}{mybib_db.txt}
+\DTLsort{Year=descending,Month=descending}{mybib}
+\fi
+
+\begin{center}
+{\Large\bf Taeyoung Lee: Curriculum Vitae}\\\vspace*{-0.2cm}\rule{\linewidth}{0.2mm}
+Department of Mechanical and Aerospace Engineering, The George Washington University\\
+800 22nd St NW, Suite 3610, Washington DC 20052\\
+Tel: 202-994-8710, \quad Fax: 202-994-0238, \quad Email: \url{tylee@gwu.edu}
+\end{center}
+
+\vspace*{0.4cm}
+
+\setlength{\tabcolsep}{0cm}
+\subsection*{Education}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{2.5cm}}X
+>{\setlength{\hsize}{8.9cm}}X
+>{\setlength{\hsize}{1cm}}X
+>{\hfill}X}
+& Ph. D   & Department of Aerospace Engineering & & Sep 2004-Apr 2008\\
+&         & {\fontshape{sc}\selectfont University of Michigan}, Ann Arbor, MI & & \\
+&         & \parbox[t]{15cm}{\textit{Thesis: \href{http://fdcl.seas.gwu.edu/tylee_phd08.pdf}{Computational Geometric Mechanics and Control of Rigid Bodies}}}\\
+&         & \parbox[t]{15cm}{\textit{Advisors:
+\href{https://aero.engin.umich.edu/people/n-harris-mcclamroch/}{N. Harris McClamroch},
+\href{http://www.math.ucsd.edu/~mleok/}{Melvin Leok (Mathematics)}}}\\
+&         & \parbox[t]{15cm}{\textit{Committee:
+\href{http://ccar.colorado.edu/scheeres/}{Daniel Scheeres},
+\href{http://www.math.lsa.umich.edu/~abloch/}{Anthony Bloch},
+\href{http://www.eecs.umich.edu/~grizzle/}{Jessy Grizzle}}}\vspace*{0.15cm}\\
+
+%\\
+& M. S    & Department of Mathematics & & Sep 2007-Apr 2008\\
+&         & {\fontshape{sc}\selectfont University of Michigan}, Ann Arbor, MI & & \vspace*{0.15cm}\\
+%\\
+& M. S    & Department of Aerospace Engineering & & 1998-2000\\
+&         & {\fontshape{sc}\selectfont Seoul National University}, Korea &   & \\
+&         & \parbox[t]{15cm}{\textit{Thesis: Nonlinear Adaptive and Robust Flight Control Using the Backstepping Algorithm}}\\
+&         & \parbox[t]{15cm}{\textit{Advisor:
+\href{http://fdcl.snu.ac.kr/people/ydkim/}{Youdan Kim}}}\vspace*{0.15cm}\\
+
+%\\
+& B. S    & Department of Aerospace Engineering &  & 1994-1998\\
+&         & {\fontshape{sc}\selectfont Seoul National University}, Korea &  & \\
+%&         & \parbox[t]{15cm}{\textit{Thesis: F-16 Nonlinear Simulator Development using OpenGL}}\\
+\end{tabularx}
+
+\vspace*{0.2cm}
+
+
+\setlength{\tabcolsep}{0cm}
+\subsection*{Professional Experience}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{3.5cm}}X
+>{\setlength{\hsize}{10.8cm}}X
+>{\hfill}X}
+& Associate Professor   & Department of Mechanical and Aerospace Engineering & Aug 2015-present\\
+&         & {\fontshape{sc}\selectfont The George Washington University}, Washington DC  \vspace*{0.10cm}\\
+%
+& Assistant Professor   & Department of Mechanical and Aerospace Engineering & Aug 2011-Jul 2015\\
+&         & {\fontshape{sc}\selectfont The George Washington University}, Washington DC  \vspace*{0.10cm}\\
+%
+& Assistant Professor   & Department of Mechanical and Aerospace Engineering & Aug 2008-Aug 2011\\
+&         & {\fontshape{sc}\selectfont Florida Institute of Technology}, Melbourne FL  \vspace*{0.10cm}\\
+%
+%%& Visiting Scholar   & Department of Aerospace Engineering & May 2009-Jun 2009\\
+%%&         & {\fontshape{sc}\selectfont University of Michigan}, Ann Arbor, MI   \vspace*{0.10cm}\\
+%%%
+%%& Postdoctoral Scholar    & Department of Aerospace Engineering & May 2008-Jul 2008\\
+%%&         & {\fontshape{sc}\selectfont University of Michigan}, Ann Arbor, MI   \vspace*{0.10cm}\\
+%
+& Military Service   & Second Lieutenant, Tactical Control Officer  & 2001--2004\\
+&&The 3rd Air Defense Artillery Division, Republic of Korea Air Force \vspace*{0.02cm}\\
+\end{tabularx}
+
+\vspace*{0.2cm}
+
+\subsection*{Research Interests}
+\begin{list}{}%
+{\setlength{\leftmargin}{1.0cm}\setlength{\itemindent}{-0.5cm}
+\setlength{\parsep}{0cm}\setlength{\itemsep}{0.12cm}\setlength{\parskip}{0cm}\setlength{\topsep}{0cm}\setlength{\partopsep}{0cm}}
+
+\item \textbf{Geometric Control on Manifolds}: Developing control nonlinear systems for dynamic systems evolving on nonlinear configuration manifolds to achieve global stability properties in a unified way
+
+
+\item \textbf{Computational Geometric Mechanics}: Construction of structure-preserving numerical integration algorithms for complex dynamic systems to obtain long-term structural stability, reliability, and high fidelity in computational results
+
+
+\item \textbf{Uncertainty Propagation and Estimation on Manifolds}: Developing computational techniques to propagate uncertainties through complex dynamics on a manifold, and designing coordinate-free estimation schemes
+
+\vspace*{0.2cm}
+
+%\item \textbf{Aerospace Systems}: Applying computational geometric control techniques for complex aerospace systems, such as tethered spacecraft, quadrotor UAVs to demonstrate extreme autonomous maneuverabilities
+
+%\item \textbf{Computational Geometric Control \& Estimation}: Construction of feedback control, optimal control, and estimation algorithms that are globally defined on Lie groups based on computational geometric methods.
+
+%\item \textbf{Dynamics and Control of Multibody}: Development of a feedback control law for multibody systems with applications to robotics and aerospace systems.
+
+
+\item \textbf{Complex Aerospace Systems}: Applying geometric approaches for dynamics, control, optimization, and estimation to complex aerospace systems, such as spacecraft attitude dynamics, low-thrust orbital transfer, asteroid mission design, tethered spacecraft, and aerial transportation
+
+%computational geometric techniques to the development of nonlinear control algorithms and exact computational approaches for nontrivial dynamics of complex aerospace systems
+
+\item \textbf{Unmanned Aerial Vehicle (UAV) Experiments}: Developing hardware systems and flight software for multirotor unmanned aerial vehicles, such as quadrotors, to illustrate aggressive autonomous flight maneuvers
+
+\item \textbf{Robotics}: Autonomous exploration algorithm for cooperating heterogeneous aerial vehicles to construct a three-dimensional map of an unknown area
+
+\end{list}
+
+%\vspace*{0.02cm}
+
+\clearpage\newpage
+% 1760928
+\subsection*{Research Grants \textnormal{\normalsize (total award: over \$3.58M)}}
+\setlength{\tabcolsep}{0cm}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X X}%
+%>{\setlength{\hsize}{15.0cm}}X
+%>{\hfill}X}
+    & Air Force Office of Scientific Research (AFOSR)  \textit{(\$600K, PI)}\hfill 2018-2021  \\
+& \quad\textit{Uncertainty Quantification, Estimation, and Optimal Control for Stochastic Hybrid Systems on a Manifold} \vspace*{0.08cm}\\
+%
+& NSF CMMI Dynamics, Control and Systems Diagnostics \href{http://www.nsf.gov/awardsearch/showAward?AWD_ID=1760927}{\#1760928} \textit{(\$261K, PI)}\hfill 2018-2021  \\
+& \quad\textit{Dynamics and Control of Long Range Micro Air Vehicles Inspired by Monarch Butterflies} \vspace*{0.08cm}\\
+%
+& NASA Innovative Advanced Concepts (NIAC) Award \textit{(\$125K, co-PI)}\hfill 2018-2019 \\
+& \quad\textit{Marsbee - Swarm of Flapping Wing Flyers for Enhanced Mars Exploration} \vspace*{0.08cm}\\
+%
+& NSF IUCRC \href{https://www.nsf.gov/awardsearch/showAward?AWD_ID=1747760}{\#1747760} \textit{(\$750K, co-PI)}\hfill 2018-2023 \\
+& \quad\textit{Center for High Pressure Plasma Energy, Agriculture, and Biomedical Technologies} \vspace*{0.08cm}\\
+%     
+& Office of Naval Research (ONR) Grant \#N00014-15-1-2043 \textit{(\$655K, co-PI)}\hfill 2015-2018 \\
+& \quad\textit{Analysis of Ship Air Wakes} \vspace*{0.08cm}\\
+%     
+& Naval Research Laboratory (NRL) Contract \#N00173-14-F-0584 \textit{(\$326K, PI)}\hfill 2015-2017 \\
+& \quad\textit{Collaborative Autonomous Aerial Exploration} \vspace*{0.08cm}\\
+%     
+& NSF CMMI Control Systems \href{http://www.nsf.gov/awardsearch/showAward?AWD_ID=1335008}{\#1335008} \textit{(\$220K, PI)}\hfill 2013-2018 \\
+& \quad\textit{Stochastic Motion Planning and Estimation with Non-Gaussian Uncertainty Distributions on a Lie Group} \vspace*{0.08cm}\\
+%
+& NSF CNS Major Research Instrumentation \href{http://www.nsf.gov/awardsearch/showAward?AWD_ID=1337722}{\#1337722} \textit{(\$500K, co-PI)}\hfill 2013-2018 \\
+& \quad\textit{Development of Large-Scale Dense Scene Capture and Tracking Instrument} \vspace*{0.08cm}\\
+%
+& NSF CMMI Dynamic Systems \href{http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=1029551}{\#1029551} \textit{(\$150K, PI)}\hfill 2010-2014 \\
+& \quad\textit{Computational Geometric Uncertainty Propagation for Hamiltonian Systems on a Lie Group} \vspace*{0.08cm}\\
+%
+& GWU Institute For Biomedical Engineering
+Interdisciplinary Research Grant \textit{(PI)}
+ \hfill 2011-2012 \\
+& \quad\textit{Optimal Control of Anti-Tachycardia Pacing Therapy}\vspace*{0.08cm}\\
+%
+& FIT Faculty Professional Development Grant \textit{(PI)}
+ \hfill 2010-2011 \\
+& \quad\textit{Development of an Autonomous Quadrotor UAV for Educational Research}\vspace*{0.08cm}\\
+%
+%& Federal Aviation Administration \textit{(co-I)}
+% \hfill 2010 \\
+%& \quad\textit{FAA Center of Excellence for Commercial Space Transportation}\vspace*{0.08cm}\\
+%
+%& Director's Research and Development Fund, JPL, NASA \textit{(co-PI: under second round review)}
+% \hfill 2011-2012 \\
+%& \quad\textit{Development of High-Fidelity Geometric Numerical Integration Techniques
+%for Tethered Spacecraft Missions}
+%& \quad\textit{Director's Research and Development Fund} \textit{(co-I)} \hfill 2011-2012\\
+%& Federal Aviation Administration \textit{(co-I)}
+% \hfill 2010 \\
+\end{tabularx}
+
+%\clearpage\newpage
+\vspace*{1cm}
+
+\subsection*{Honor \& Awards}
+\setlength{\tabcolsep}{0cm}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X X}%
+%>{\setlength{\hsize}{15.0cm}}X
+%>{\hfill}X}
+& \textit{Air Force Summer Faculty Fellowship}, Air Force Office of Scientific Research, Kirtland AFB, Albuquerque NM \hfill 2013\\
+& \quad \textit{Vision-Based Spacecraft Formation Control and Estimation Network}\vspace*{0.08cm}\\
+%
+& \textit{Air Force Summer Faculty Fellowship}, Air Force Office of Scientific Research, Kirtland AFB, Albuquerque NM \hfill 2012\\
+& \quad \textit{Vision-Based Spacecraft Relative Attitude Control and Estimation}\vspace*{0.08cm}\\
+%
+& \textit{Best Student Course Evaluation}, Mechanical and Aerospace Engineering, Florida Institute of Technology
+ \hfill 2010 \\
+& \textit{Distinguished Dissertation Award, honorable mention}, University of Michigan
+ \hfill 2009 \\
+& \textit{Distinguished Achievement Award}, College of Engineering, University of Michigan
+ \hfill 2008\\
+& \textit{Ivor K. McIvor Award}, College of Engineering, University of Michigan
+(outstanding research in applied mechanics) \hfill 2008\\
+& \textit{SIAM Conference on Computational Science and Engineering, BGCE Student Paper Prize, finalist} \hfill 2007\\
+& \textit{Rackham Predoctoral Fellowship}, University of Michigan \hfill 2006-2007\\
+& \textit{Rackham International Students Fellowship}, University of Michigan \hfill 2006\\
+& \textit{Rackham Travel Grant}, University of Michigan \hfill Feb, Aug 2006\\
+& \textit{International Scholarship}, Ministry of Education \& Human
+Resources Development, Korea \hfill 2004
+\end{tabularx}
+
+
+\renewcommand{\thefootnote}{}
+\renewcommand\footnotemark{}
+
+\clearpage\newpage
+
+\renewcommand{\refname}{Publications}
+{\noindent{\large\bf Publications}\hfill
+(available at \href{https://scholar.google.com/citations?user=sBBzntUAAAAJ}{Google scholar})
+\footnote{$^*$ pending}
+}\\
+
+\newcounter{nBK}
+\newcounter{nARC}\newcounter{nARC_pending}\newcounter{nARC_total}
+\newcounter{nPROC}\newcounter{nPROC_pending}\newcounter{nPROC_total}
+\newcounter{nP_total}
+
+\ifdatabase
+% count book
+\DTLforeachbibentry[\DTLbibfieldiseq{Key}{BK}]{mybib}{\addtocounter{nBK}{1}}
+% count articles
+\DTLforeachbibentry[\DTLbibfieldiseq{EntryType}{article}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{nARC_pending}{1}}%
+{\addtocounter{nARC}{1}}}
+\DTLforeachbibentry[\DTLbibfieldiseq{EntryType}{incollection}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{nARC_pending}{1}}%
+{\addtocounter{nARC}{1}}}
+% count proceeding articles 
+\DTLforeachbibentry[\DTLbibfieldiseq{EntryType}{inproceedings}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{nPROC_pending}{1}}%
+{\addtocounter{nPROC}{1}}}
+\DTLforeachbibentry[\DTLbibfieldiseq{EntryType}{misc}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{nPROC_pending}{1}}%
+{\addtocounter{nPROC}{1}}}
+\DTLforeachbibentry[\DTLbibfieldiseq{EntryType}{unpublished}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{nPROC_pending}{1}}%
+{\addtocounter{nPROC}{1}}}
+
+\addtocounter{nARC_total}{\value{nARC}}\addtocounter{nARC_total}{\value{nARC_pending}}
+\addtocounter{nPROC_total}{\value{nPROC}}\addtocounter{nPROC_total}{\value{nPROC_pending}}
+\addtocounter{nP_total}{\value{nBK}}\addtocounter{nP_total}{\value{nARC_total}}\addtocounter{nP_total}{\value{nPROC_total}}
+\fi
+
+\begin{center}
+\begin{threeparttable}
+\begin{tabularx}{0.93\textwidth}{X*{3}{>{\centering\arraybackslash}p{2.3cm}}}\toprule
+\multirow{2}{*}{Category} 
+& Published & \multirow{2}{*}{Submitted} & \multirow{2}{*}{Total}\\
+& (or accepted) \\\midrule
+Book & \arabic{nBK} & 0 & \arabic{nBK}\\
+Journal & \arabic{nARC} & \arabic{nARC_pending} & \arabic{nARC_total}\\
+Peer-reviewed Conference & \arabic{nPROC} & \arabic{nPROC_pending} & \arabic{nPROC_total}\\\midrule
+Total & & & \arabic{nP_total}\\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\item (Citation:2958,\; h-index=28, \; i10-index=48)
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+
+\vspace*{0.5cm}
+
+%\DTLbibfieldcontains{Note}{submitted}
+
+{\noindent\textbf{Book}}
+\ifdatabase
+\begin{enumerate}
+\ifdatabasenew\item tmp\fi
+\renewcommand{\labelenumi}{[\arabic{enumi}]}
+\DTLforeachbibentry[\DTLbibfieldiseq{Key}{BK}]{mybib}{%
+%\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}{
+\addtocounter{enumi}{1}\item[{[\arabic{enumi}]}] \DTLformatbibentry
+%}{\item \DTLformatbibentry}
+}
+\end{enumerate}
+\fi
+
+\vspace*{0.3cm}
+
+
+{\noindent\textbf{Computational Geometric Control}}
+\ifdatabase
+\begin{enumerate}
+\ifdatabasenew\item tmp\fi
+\renewcommand{\labelenumi}{[\arabic{enumi}]}
+\DTLforeachbibentry[\DTLbibfieldiseq{Key}{GC}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\ifthenelse{\DTLbibfieldcontains{Note}{in preparation}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\item \DTLformatbibentry}%
+}}
+\end{enumerate}
+\fi
+
+\vspace*{0.3cm}
+
+{\noindent\textbf{Computational Geometric Optimization}}
+\ifdatabase
+\begin{enumerate}
+\ifdatabasenew\item tmp\fi
+\renewcommand{\labelenumi}{[\arabic{enumi}]}
+\DTLforeachbibentry[\DTLbibfieldiseq{Key}{GO}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\ifthenelse{\DTLbibfieldcontains{Note}{in preparation}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\item \DTLformatbibentry}%
+}}
+\end{enumerate}
+\fi
+
+\vspace*{0.3cm}
+
+{\noindent\textbf{Computational Geometric Mechanics}}
+
+\ifdatabase
+\begin{enumerate}
+\ifdatabasenew\item tmp\fi
+\renewcommand{\labelenumi}{[\arabic{enumi}]}
+\DTLforeachbibentry[\DTLbibfieldiseq{Key}{GM}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\ifthenelse{\DTLbibfieldcontains{Note}{in preparation}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\item \DTLformatbibentry}%
+}}
+\end{enumerate}
+\fi
+
+% \clearpage\newpage
+
+{\noindent\textbf{Uncertainty Propagation / Estimation}}
+\ifdatabase
+\begin{enumerate}
+\ifdatabasenew\item tmp\fi
+\renewcommand{\labelenumi}{[\arabic{enumi}]}
+\DTLforeachbibentry[\DTLbibfieldiseq{Key}{GE}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\ifthenelse{\DTLbibfieldcontains{Note}{in preparation}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\item \DTLformatbibentry}%
+}}
+\end{enumerate}
+\fi
+
+\vspace*{0.3cm}
+
+{\noindent\textbf{Nonlinear Flight Control}}
+
+\ifdatabase
+\begin{enumerate}
+\ifdatabasenew\item tmp\fi
+\renewcommand{\labelenumi}{[\arabic{enumi}]}
+\DTLforeachbibentry[\DTLbibfieldiseq{Key}{NF}]{mybib}{%
+\ifthenelse{\DTLbibfieldcontains{Note}{submitted}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\ifthenelse{\DTLbibfieldcontains{Note}{in preparation}}%
+{\addtocounter{enumi}{1}\item[{$^*$[\arabic{enumi}]}] \DTLformatbibentry}%
+{\item \DTLformatbibentry}%
+}}
+\end{enumerate}
+\fi
+
+
+
+\subsection*{Invited Talks}
+\setlength{\tabcolsep}{0cm}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{14.3cm}}X%
+>{\hfill}X}
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Apr 2018\\
+& {Virginia Tech}, Blacksburg VA\vspace*{0.08cm}\\
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Mar 2018\\
+& {University of Alabama, Huntsville}, Huntsville AL\vspace*{0.08cm}\\
+
+& \textit{Intrinsic Formulation of Bayesian Estimation on a Lie Group} & Aug 2017\\
+& {Electrical Engineering, KAIST}, Daejeon, South Korea\vspace*{0.08cm}\\
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Aug 2017\\
+& {Aerospace Engineering, KAIST}, Daejeon, South Korea\vspace*{0.08cm}\\
+
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Mar 2016\\
+& {University of Michigan}, Ann Arbor, MI\vspace*{0.08cm}\\
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Mar 2016\\
+& {MAE Seminar Series, Syracuse University}, Syracuse, NY\vspace*{0.08cm}\\
+
+
+& \textit{Global Formulations of Stochastic Analysis on Manifolds} & Aug 2015\\
+& {NSF Workshop on Learning, Perception and Control in Robots and Humans}, Arlington VA\vspace*{0.08cm}\\
+
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Sep 2014\\
+& {MAE Seminar Series, Seoul National University}, South Korea\vspace*{0.08cm}\\
+
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Sep 2014\\
+& {Department Seminar Series, Yonsei University}, South Korea\vspace*{0.08cm}\\
+
+
+& \textit{Stochastic Optimal Motion Planning and Estimation for the Attitude Kinematics on SO(3)} & Mar 2014\\
+& {AMS Eastern Sectional Meeting, Special Session on Mechanics and Control}, Baltimore MD\vspace*{0.08cm}\\
+
+
+& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems
+} & Jul 2013\\
+& {AFRL Seminar Series}, Kirtland AFB, Albuquerque NM\vspace*{0.08cm}\\
+
+
+& \textit{Computational Geometric Mechanics and Controls for Complex Aerospace Systems
+} & Mar 2013\\
+& {ECE Seminar Series}, University of Virginia\vspace*{0.08cm}\\
+
+& \textit{Computational Geometric Mechanics and Control on Nonlinear Manifolds
+} & Nov 2011\\
+& {Mathematics Colloquium Series}, University of Maryland Baltimore County\vspace*{0.08cm}\\
+
+& \textit{Geometric Control on Nonlinear Manifolds
+for Complex Aerospace Systems
+} & Apr 2011\\
+& {Physical Sciences Department Colloquium Series}, Embry-Riddle Aeronautical University\vspace*{0.08cm}\\
+
+& \textit{Geometric Control on Nonlinear Manifolds
+for Complex Aerospace Systems
+} & Mar 2011\\
+& {MAE Seminar}, George Washington University\vspace*{0.08cm}\\
+
+& \textit{Discrete Geometric Mechanics} & Dec 2010\\
+& {Young Researchers Workshop on Geometry, Mechanics and Control}, University of La Laguna, Spain\vspace*{0.08cm}\\
+& \textit{Computational Geometric Mechanics and Control of Multibody Systems} & May 2010\\
+& {University of Michigan}\vspace*{0.08cm}\\
+& \textit{Lie Group Variational Integrator for Dynamics and Control of Multibody Systems} & Apr 2010\\
+& {Structured Integrators Workshop}, University of California, San Diego\vspace*{0.08cm}\\
+& \textit{Computational Geometric Mechanics and Control of Rigid Bodies} & Feb 2008\\
+& {Florida Institute of Technology}, Melbourne, Florida\vspace*{0.08cm}\\
+& \textit{Computational Geometric Mechanics, Control, and Estimation of Rigid Bodies on Lie Groups} & Feb 2007\\
+& {SIAM Conference on Computational Science and Engineering}, Costa Mesa, California\vspace*{0.08cm}\\
+& \textit{Optimal Control of a Rigid Body using Geometrically Exact Computations on Lie Groups} & Oct 2006\\
+& {Flight Dynamics and Control Seminar}, University of Michigan\vspace*{0.08cm}\\
+& \textit{Attitude Maneuvers of a Rigid Spacecraft in a Circular Orbit} & Nov 2005\\
+& {Flight Dynamics and Control Seminar}, University of Michigan\vspace*{0.08cm}\\
+& \textit{Lie Group Variational Integrator for the Attitude dynamics of a Rigid body} & Feb 2005\\
+& {Flight Dynamics and Control Seminar}, University of Michigan
+\end{tabularx}
+
+
+\vspace*{0.2cm}
+
+\newcommand{\bfi}[1]{\textbf{\textit{#1}}}
+
+\subsection*{Editorial Services}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{14.3cm}}X%
+>{\hfill}X}
+
+& \bfi{Senior Editor}:\quad Conference Editorial Board \quad  & 2018\\
+& 2018 International Conference on Ubiquitous Robotics & \\[0.2cm]
+
+& \bfi{Committee Member}:\quad Technical Program Committee \quad  & 2018\\
+& 2018 American Control Conference & \\[0.2cm]
+
+& \bfi{Committee Member}:\quad Technical Program Committee \quad  & 2016\\
+& 2016 American Control Conference & \\[0.2cm]
+
+&\bfi{Associate Editor}: Conference Editorial Board, IEEE Robotics and Automation Society & Dec 2014-present \\
+& 2015, 2016, 2017, 2018 IEEE Conference on Robotics and Automation& \\[0.2cm]
+
+&\bfi{Associate Editor}: Conference Editorial Board, IEEE Control System Society & Jun 2013-present \\[0.2cm]
+& 2014, 2015, 2016, 2017, 2018 American Control Conference& \\[0.2cm]
+& 2014, 2015, 2016, 2017, 2018 IEEE Conference on Decision and Control& \\[0.2cm]
+
+& \bfi{Committee Member}:\quad Program Committee, Conference Organization Board\quad  & Oct 2014-Sep 2015\\
+& 2015 IMA Conference on Mathematics on Robotics & \\[0.2cm]
+
+% &\bfi{Associate Editor}: Journal on Automation and Control Engineering & Mar 2013-present 
+\end{tabularx}
+
+\vspace*{0.2cm}
+
+
+\subsection*{Conference Organization and Service}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{14.3cm}}X%
+>{\hfill}X}
+
+%
+%&  \bfi{Chair}:\quad Quadrotor controls  & Dec 2014\\
+%& {Regular Session  at IEEE Conference on Decision and Control} \\[0.2cm]
+%%
+& \bfi{Committee Member}:\quad Local Arrangement Committee, Conference Organization Board\quad  & Jun 2013\\
+& American Control Conference\\[0.2cm]
+%
+%& \bfi{Co-chair}:\quad Algebraic/Geometric Methods & Jun 2013\\
+%& {Regular Session  at American Control Conference} \\[0.2cm]
+%
+%& \bfi{Co-chair}:\quad Spacecraft Control & Jun 2012\\
+%& {Regular Session  at American Control Conference} \\[0.2cm]
+%
+%&  \bfi{Co-chair}:\quad Robust Adaptive Control & Dec 2011\\
+%& {Regular Session  at IEEE Conference on Decision and Control} \\[0.2cm]
+%
+&  \bfi{Organizer, Chair}:\quad {Geometric Control on Nonlinear Manifolds} & Dec 2010\\
+& {Invited Session  at IEEE Conference on Decision and Control}, Atlanta \\[0.2cm]
+%
+%&  \bfi{Chair}:\quad Computational Methods & Jun 2010\\
+%& {Regular Session  at IEEE Conference on Decision and Control} \\[0.2cm]
+%
+& \bfi{Organizer, Chair}:\quad {Synergies and Interplay of Nonlinear Dynamics and Control} & May 2010\\
+& Symposium in honor of Dr. Harris McClamroch, University of Michigan\\
+& \href{http://dx.doi.org/10.1109/MCS.2010.937816}{``HarrisFest [Conference Report]},'' \emph{IEEE Control System Magazine}, vol. 30, no. 5, pp. 81-83, 2010
+%2010,  \href{http://dx.doi.org/10.1109/MCS.2010.937816}{10.1109/MCS.2010.937816}. \\[0.2cm]
+%
+\end{tabularx}
+
+
+\subsection*{Professional Service and Review}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{17.3cm}}X}
+
+
+&\bfi{Review Panelist}: National Science Foundation (NSF) \hfill 2013, 2015\vspace*{0.08cm}\\
+
+&\bfi{Reviewer}: National Science Foundation (NSF); 
+IEEE Transactions on Automatic Control; 
+IEEE Transactions on Control Systems Technology; 
+IEEE Transactions on Mechatronics; 
+IEEE Transactions on Neural Networks; 
+IEEE Transaction on Plasma Science; 
+IEEE Transactions on Industrial Electronics; 
+IEEE Robotics and Automation Magazine; 
+SIAM Journal on Control and Optimization; 
+ASME Journal of Dynamics, Measurements, and Control; 
+AIAA Journal of Guidance, Control, and Dynamics; 
+International Journal of Aerospace Engineering; 
+International Journal of Adaptive Control and Signal Processing; 
+International Journal of Advanced Robotic Systems; 
+International Journal of Control; 
+International Journal of Control, Automation and Systems; 
+International Journal of Robust and Nonlinear Control; 
+Asian Journal of Control; 
+Acta Astronautica; 
+Aerospace Science \& Technology; 
+Automatica; 
+Celestial Mechanics and Dynamical Astronomy; 
+The Astronomical Journal; 
+Control Engineering Practice; 
+Computer Physics Communications; 
+Chinese Journal of Aeronautics; 
+The Astronomical Journal; 
+Journal of Aerospace Engineering;
+Journal of Geometric Mechanics; 
+Journal of Nonlinear Science; 
+Mathematics of Control, Signals, and Systems; 
+Transactions of the Japan Society for Aeronautical and Space Sciences, Aerospace Technology;
+Robotica; 
+Symmetry, Integrability and Geometry: Methods and Applications; 
+Systems and Control Letters; 
+IEEE Conference on Decision and Control; 
+IEEE Multi-conference on Systems and Control; 
+IEEE International Conference on Robotics and Automation; 
+IEEE International Conference on Intelligent Robots and Systems;
+AIAA Guidance, Navigation and Control Conference; 
+American Control Conference; 
+Applied Mathematical Modelling; 
+European Control Conference; 
+International Conference on Unmanned Aircraft Systems; 
+IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
+
+&\bfi{Assessment Coordinator}: University coordinator for Southern Association of Colleges and Schools (SACS) accreditation\vspace*{0.08cm}\\
+
+&\bfi{Judge}: SSPI Mid-Atlantic Regional Chapter Scholarship Competition\hfill Apr 2011\vspace*{0.08cm}\\
+
+&\bfi{Judge}: GWU SEAS Research and Development Showcase\hfill 2013, 2014\\
+&\bfi{Judge}: GWU Research Day\hfill 2017\\
+&\bfi{Judge}: GWU SEAS Pelton Senior Project Award\hfill 2017\\
+\end{tabularx}
+\vspace*{0.2cm}
+
+
+\subsection*{University Service}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{17.3cm}}X}
+
+&\bfi{Committee Member}: Research Committee, Faculty Senate, GWU \hfill 2013-2014\vspace*{0.08cm}\\
+
+&\bfi{Committee Member}: Graduate Curriculum Committee, Mechanical and Aerospace Engineering, GWU\hfill 2013-2015\vspace*{0.08cm}\\
+
+&\bfi{Faculty secretary}: Mechanical and Aerospace Engineering, GWU\hfill 2012-2013\vspace*{0.08cm}\\
+
+\end{tabularx}
+
+
+\vspace*{0.2cm}
+
+\setlength{\tabcolsep}{0cm}
+\subsection*{Mentoring Experiences}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+>{\setlength{\hsize}{4.1cm}}X X}
+& Postdoctoral Scientist 
+& Dr. Kuya Takami: Autonomous aerial exploration\hfill 2016-2017\\
+& & Dr. Daewon Lee: Adaptive control of autonomous load transportation\hfill 2012-2014\\[0.2cm]
+& Doctoral Students 
+  & Kanishke Gamagedar (Ph.D): Autonomous landing on a ship\hfill 2018-present\\
+& & Mahdis Bisheban (Ph.D): Geometric control of quadrotors under wind\hfill 2015-present\\
+& & Shankar Kulumani (Ph.D): Low thrust optimal orbital maneuvers\hfill 2014-present\\
+& & Evan Kaufman (Ph.D): Autonomous aerial exploration\hfill 2012-present\\
+& & Dr. Tse-Huai Wu (Ph.D): Geometric control and estimation on SO(3)\hfill 2013-2015\\
+& & Dr. Farhad Goodarzi (Ph.D): Geometric control of quadrotor UAV\hfill 2011-2015
+\\[0.2cm]
+& Masters Students
+  & Zichao Hou (MS): Autonomous exploration of Mars\hfill 2018-present\\
+& & John Shepherd (MS): Aerial manipulation\hfill 2018-present\\
+& & Kanishke Gamagedar (MS): Development of telemetry for ship air wakes\hfill 2016-2017\\
+& & Kalpesh Patil (MS): Development of telemetry for ship air wakes\hfill 2015-2017\\
+& & Kiren Caldwell (MS) : Outdoor flight of quadrotor UAV via differential GPS \hfill 2014-2015\\
+& & John A. Dougherty (MS): Laser-based guidance of quadrotor UAV\hfill 2013-2014\\
+& & Tse-Huai Wu (MS): Vision-based spacecraft formation control \hfill 2011-2013 
+\\[0.2cm]
+& Undergraduate Students 
+  & Noah Curtiss : Development of multirotor UAV \hfill 2017-present\\
+& & Carolyn Fisk : Cubesat mission analysis and design \hfill 2017-present\\
+& & Chris Poole : Development of multirotor UAV \hfill 2015-2018\\
+& & Kiren Caldwell : Development of user interface for UAV control \hfill 2013-2014\\
+& & John Dougherty:  Development of i2c interface circuit board\hfill 2012-2013\\
+& & Ryan Mossbarger: Development of thrust stand \hfill 2012-2013 
+\\[0.2cm]
+& Visiting Scholar
+& Harsh Sharmar : Geometric numerical integration \hfill 2018\\[0.2cm]
+& Thesis Committee
+  & Mohammad Goli (Ph.D): Vehicle Platooning\hfill Mar 2017\\
+& & George Teel (Ph.D): Micro-cathode arc thruster\hfill Mar 2017\\
+& & Sungrae Kim (MS): Micro-cathode arc thruster\hfill Mar 2016\\
+& & Joel Slotten (Ph.D): Investigation of orbital debris\hfill Jan 2016\\
+& & Joseph Lukas (Ph.D): Enhancing micro-cathode arc thruster\hfill Jan 2016\\
+& & Tse-Huai Wu (Ph. D): Geometric control and estimation on SO(3)\hfill Nov 2015\\
+& & Farhad Goodarzi (Ph.D): Geometric control of quadrotor UAV\hfill Jul 2015\\
+& & John A. Dougherty (MS): Laser-based guidance of quadrotor UAV\hfill May 2014\\
+& & George Teel (MS): Heated-anode cathode arc thruster\hfill May 2014\\
+& & Dereck Chiu (MS): Bi-modal micro-cathode arc thruster\hfill May 2014\\
+& & Jaime Hervas at ERAU (Ph.D): Higher-order nonholonomic systems\hfill Jul~2013\\
+& & Paul Moubarak (Ph.D): Reconfigurable multi-directional manipulation\hfill Mar~2013\\
+& & TaiSen Zhuang (Ph.D): Micro-cathode thruster for cube satellite propulsion\hfill Dec 2012\\
+& & Tse-Huai Wu (MS): Spacecraft relative attitude formation tracking\hfill Nov 2012\\
+& & John Solder (MS): Magnetically enhanced micro-cathode vacuum arc thruster\hfill Jul 2012\\
+& &Brenton Duffy (Ph.D): Perturbation for
+the elliptic restricted three-body problem\hfill Mar 2012\\
+& &Lubos Brieda (Ph.D): Multi-scale simulation of hall thrusters \hfill Mar 2012\\
+& &Therese Suaris (Ph.D): Micro-vacuum arc thrusters and frozen orbits \hfill Aug 2011\\
+\end{tabularx}
+
+\vspace*{0.2cm}
+
+\subsection*{Award by Students}
+\setlength{\tabcolsep}{0cm}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X X}%
+%>{\setlength{\hsize}{15.0cm}}X
+%>{\hfill}X}
+& \textit{AFRL Scholar}: (Carolyn Fisk)\hfill 2018\\
+& Kirtland AFB, Albuquerque NM\\[0.2cm]
+
+& \textit{Most Innovative/Creative Project Award}: (Shankar Kulumani)\hfill 2017\\
+& {Spacecraft trajectory design near asteroid 4769 Castalia}\\
+& The 7th Annual Student Competition, Society for Satellite Professional Internationals (SSPI)\\[0.2cm]
+
+& \textit{Mechanical and Aerospace Engineering -- 1st Place}: (Shankar Kulumani) \hfill 2017\\
+& {Spacecraft trajectory design near asteroid 4769 Castalia}\\
+& GWU Research Day\\[0.2cm]
+
+
+& \textit{Best Theoretical Poster -- Runner-up} (Shankar Kulumani)\hfill 2017\\
+& Spacecraft trajectory design near asteroid 4769 Castalia\\
+& SEAS R\&D Showcase, George Washington University\\[0.2cm]
+
+
+& \textit{Entrepreneurship Prize} (Evan Kaufman)\hfill 2017\\
+& A robotic vacuuming software tool with autonomous exploration via exact occupancy grid mapping\\
+& SEAS R\&D Showcase, George Washington University\\[0.2cm]
+
+
+& \textit{Best Theoretical Poster -- 3rd Place} (Mahdis Bisheban)\hfill 2017\\
+& Computational geometric system identification\\
+& SEAS R\&D Showcase, George Washington University\\[0.2cm]
+
+
+& \textit{Student Travel Award}: (Mahdis Bisheman), {American Control Conference} \hfill 2017
+\\[0.2cm]
+
+
+& \textit{Student Travel Award}: (Evan Kaufman, Shankar Kulumani), {American Control Conference} \hfill 2016
+\\[0.2cm]
+
+
+& \textit{Experimental Research Awards-- 1st Place} (Shankar Kulumani, Christopher Poole)\hfill 2016\\
+& Geometric adaptive control of attitude dynamics on SO(3) with state inequality constraints\\
+& SEAS R\&D Showcase, George Washington University\\[0.2cm]
+
+
+& \textit{Heatherington Family Annual Scholarship}: (Shankar Kulumani)\hfill 2016\\[0.2cm]
+
+& \textit{Most Innovative/Creative Project Award}: (Shankar Kulumani)\hfill 2015\\
+& {Systematic design of optimal low-thrust orbital transfers in the three-body problem}\\
+& The 5th Annual Student Competition, Society for Satellite Professional Internationals (SSPI)\\[0.2cm]
+
+& \textit{Second Prize}: (John Dougherty)\\
+& {Laser-based onboard sensing and estimation for precise landing of a quadrotor UAV on an inclined surface} \hfill 2014\\
+& AIAA Region I Student Conference\\[0.2cm]
+
+& \textit{Second Prize}: (Tse-Huai Wu), {Vision-based spacecraft attitude formation control} \hfill 2014\\
+& GWU Research Day\\[0.2cm]
+
+& \textit{Student Travel Award}: (Farhad Goodarzi, John Dougherty), {American Control Conference} \hfill 2014\\[0.2cm]
+
+& \textit{AFRL Scholar}: (Evan Kaufman)\hfill 2014\\
+& Kirtland AFB, Albuquerque NM\\[0.2cm]
+
+& \textit{AFRL Scholar}: (Evan Kaufman)\hfill 2013\\
+& Kirtland AFB, Albuquerque NM\\[0.2cm]
+
+& \textit{Third Place Prize}: (Tse-Huai Wu), {Vision-Based Spacecraft Formation Control and Estimation Network} \hfill 2013\\
+& The 3rd Annual Student Competition, Society for Satellite Professional Internationals (SSPI)\\[0.2cm]
+
+& \textit{SUPER Fellowship}: (Kiren Caldwell), {Spacecraft Formation Control Testbed
+with Free-Floating Aerial Vehicles} \hfill 2013\\
+& Summer Undergraduate Program in Engineering Research, The George Washington University\vspace*{0.08cm}\\
+\end{tabularx}
+
+
+\vspace*{0.2cm}
+
+\setlength{\tabcolsep}{0cm}
+\subsection*{Teaching Experience \textnormal{\normalsize (average student evaluation: 4.8/5.0)}}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+X}
+%>{\setlength{\hsize}{12cm}}X
+%>{\hfill}X}
+&\textit{MAE3145: Orbital Mechanics and Space Dynamics} \hfill Fall 2011-2016\\
+&\textit{MAE6292: Special Topic: Applied Nonlinear Control} \hfill Spring 2012,2014,2016,2018\\
+&\textit{MAE6292: Special Topic: Optimal Control and Estimation} \hfill Spring 2015\\
+&\textit{MAE6277: Spacecraft Attitude Control} \hfill Spring 2013, 2017\\
+&\textit{MAE6246: Electromechanical Control Systems} \hfill Spring 2013, Fall 2013-2016\\
+&Department of Mechanical and Aerospace Engineering, The George Washington University\vspace*{0.30cm}\\
+
+&\textit{MAE5690: Special Topic: Spacecraft Dynamics and Control} \hfill Spring 2011\\
+&\textit{MAE5690: Special Topic: Nonlinear Systems} \hfill Fall 2010\\
+&\textit{MAE4600: Engineering Astrodynamics} \hfill Fall 2009\\
+&\textit{MAE4242: Aircraft Stability and Control} \hfill Fall 2008-2010\\
+&\textit{MAE4014: Control Systems} \hfill Spring 2009-2011\\
+&\textit{MAE2082: Dynamics} \hfill Spring, Summer 2010\\
+&Department of Mechanical and Aerospace Engineering, Florida Institute of Technology
+%
+%\vspace*{0.10cm}
+%\\
+%
+%&Instructor   & \textit{Introduction to Control System Engineering} \hfill Summer 2010\\
+%			&& Engineering Summer Camp for K-12 Students, Florida Institute of Technology\\%\vspace*{0.10cm}\\
+%
+%&Instructor   & Part-time (50\%) Lecturing on \textit{AE740: Analytical and Computational Dynamics} \hfill Fall 2007\\
+%&&Department of Aerospace Engineering, University of Michigan \vspace*{0.06cm}\\
+%
+%& Research Assistant   &  Computational Geometric Mechanics for the Control of Clusters of Rigid Bodies \hfill 2006\\
+%& &Margaret and Herman Sokol Research Grant, %
+%Department of Mathematics, University of Michigan \vspace*{0.06cm}\\
+%%\\
+%& Research Assistant   &  Computational Geometric Mechanics  \hfill 2005\\
+%& &Department of Mathematics, University of Michigan \vspace*{0.06cm}\\
+%%\\
+%&Teaching Assistant   & \parbox[t]{13cm}{Course note development, {\textit{AE245: Steady Aircraft Flight and Aircraft Performance}}} \hfill  2005\\
+%&&Department of Aerospace Engineering, University of Michigan \vspace*{0.06cm}\\
+%%\\
+%&Research Assistant   & Medium Range Missile Trajectory Optimization  \hfill 1998--2000\\
+%&&Agency for Defense Development, Korea\vspace*{0.06cm}\\
+%%\\
+%&Research Assistant   & Institute of Advanced Machinery and Design  \hfill 1998--2000\\
+%&&Seoul National University, Korea
+\end{tabularx}
+
+
+\vspace*{0.2cm}
+
+\setlength{\tabcolsep}{0cm}
+\subsection*{Outreach}
+\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+X}
+%>{\setlength{\hsize}{12cm}}X
+%>{\hfill}X}
+& \textit{Introduction to Control System Engineering} \hfill May 2015\\
+& Workshop for Robotics Group at Bell Multicultural High School\vspace*{0.20cm}\\
+%
+& \textit{Introduction to Control System Engineering} \hfill May 2014\\
+& Workshop for Robotics Group at Bell Multicultural High School\vspace*{0.20cm}\\
+%
+& \textit{Introduction to Control System Engineering} \hfill Jul 2010\\
+& Engineering Summer Camp for K-12 Students, Florida Institute of Technology
+\end{tabularx}
+
+
+
+
+%\vspace*{0.2cm}
+%
+%
+%\subsection*{References}
+%\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
+%X}
+%& \textbf{N. Harris McClamroch}, \textit{Professor emeritus}, Department of Aerospace Engineering, University of Michigan\\
+%&    1320 Beal Avenue, Ann Arbor, MI 48109-2140\\
+%&    Tel: 734-971-3949 \qquad Fax: 734-763-0578 \qquad Email: \href{mailto:nhm@umich.edu}{nhm@umich.edu}\\[0.2cm]
+%%
+%&\textbf{Melvin Leok}, \textit{Professor}, Department of Mathematics, University of California, San Diego\\
+%&    9500 Gilman Drive, Dept. 0112, La Jolla, CA 92093-0112, USA.\\
+%&    Tel: 858-534-2126 \qquad Fax: 858-534-5273 \qquad Email: \href{mailto:mleok@math.ucsd.edu}{mleok@math.ucsd.edu}\\[0.2cm]
+%%
+%%& \textbf{Anthony Bloch}, \textit{Alexander Ziwet Collegiate Professor}, Department of Mathematics, University of Michigan\\
+%%&    4844 East Hall,
+%%    530 Church Street, Ann Arbor, MI 48109-1043\\
+%%&    Tel: 734-647-4980 \qquad Fax: 734-763-0937 \qquad Email: \href{mailto:abloch@umich.edu}{abloch@umich.edu}\\[0.2cm]
+%%
+%& \textbf{Daniel J. Scheeres}, \textit{Professor, A. Richard Seebass Chair}, Aerospace Engineering Sciences, University of Colorado
+%\\
+%&    Boulder, CO 80309-0429\\
+%&    Tel: 303-492-7420 \qquad Fax: 303-492-7881  \qquad Email: \href{mailto:scheeres@colorado.edu}{scheeres@colorado.edu}\\[0.2cm]
+%%
+%& \textbf{Gregory S. Chirikjian}, \textit{Professor}, Mechanical Engineering, Johns Hopkins University
+%\\
+%&    Latrobe Hall 223, 3400 North Charles Street, Baltimore, MD 21218-2682
+%\\
+%&    Tel: 410-516-6782 \qquad Fax:  410-516-4316  \qquad Email: \href{mailto:gregc@jhu.edu}{gregc@jhu.edu}\\[0.2cm]
+%%
+%& \textbf{Dong-Eui Chang}, \textit{Associate Professor}, Department of Applied Mathematics, University of Waterloo\\
+%& 200 University Ave. W. Waterloo, Ontario, N2L 3G1 Canada
+%\\
+%&    Tel: 519-888-4567 \qquad Fax:  519-746-4319  \qquad Email: \href{mailto:dechang@uwaterloo.ca}{dechang@uwaterloo.ca}\\[0.2cm]
+%%& \textbf{Ilya Kolmanovsky}, \textit{Professor}, Department of Aerospace Engineering, University of Michigan\\
+%%&    3038 FXB,
+%%    1320 Beal Avenue, Ann Arbor, MI 48109-2140\\
+%%&    Tel: 734-615-9655 \qquad Fax: 734-763-0578 \qquad Email: \href{mailto:ilya@umich.edu}{ilya@umich.edu}\\[0.2cm]
+%%
+%%& \textbf{Jessy W. Grizzle}, \textit{Professor}, Department of Electrical Engineering and Computer Science, University of Michigan\\
+%%&    4421 EECS,
+%%    1301 Beal Avenue, Ann Arbor, MI 48109-2122\\
+%%&    Tel: 734-763-3598 \qquad Fax: 734-763-8041 \qquad Email: \url{grizzle@eecs.umich.edu}\\[0.2cm]
+%%%
+%%& \textbf{Denise Bernstein}, \textit{Professor}, Department of Aerospace Engineering, University of Michigan\\
+%%&    1320 Beal Avenue, Ann Arbor, MI 48109-2140\\
+%%&    Tel: 734-971-3949 \qquad Fax: 734-763-0578 \qquad Email: \href{mailto:dsbaero@umich.edu}{dsbaero@umich.edu}\\[0.2cm]
+%%&\textbf{Youdan Kim}, \textit{Professor}, Department of Aerospace Engineering, Seoul National University\\
+%%&    San 56-1, Shillim-dong, Gwanak-gu, Seoul, KOREA\\
+%%&    Tel: 82-2-880-7398 \qquad Fax: 82-2-887-2662 \qquad Email:
+%%\url{ydkim@snu.ac.kr}
+%\end{tabularx}
+%
+%
+%%\vspace*{0.2cm}
+%%
+%%
+%%\paragraph{Nationality}\quad Citizen of South Korea,$\;$ Permanent Resident of the United States (green card holder).
+%
+%
+%%\clearpage\newpage
+%
+%%
+%%\nocite{*}
+%%\bibliography{tylee}
+%%\bibliographystyle{IEEEtrandoi}
+
+
+\end{document}
