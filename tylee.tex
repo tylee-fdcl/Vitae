@@ -7,6 +7,7 @@
 \usepackage[anythingbreaks]{breakurl}
 \usepackage{threeparttable,booktabs}
 \usepackage{wrapfig}
+\usepackage{enumitem}
 
 \newcommand{\SO}{\mathsf{SO(3)}}
 \newcommand{\SE}{\mathsf{SE(3)}}
@@ -35,7 +36,7 @@
 
 \newif\ifdatabasenew
 \databasenewfalse
-\databasenewtrue
+%\databasenewtrue
 
 \newcommand{\DTLformatdoi}[1]{doi:\href{http://dx.doi.org/#1}{#1}}
 \newcommand{\DTLformaturl}[1]{url:\href{#1}{#1}}
@@ -172,11 +173,9 @@ Month,Year}{%
 \nocite{*}    
 \DTLloadbbl{mybib}{./bib/tylee}
 \ifdatabase
-%\DTLloadbbl{mybib}{../tylee}
-\DTLsettabseparator
-\DTLsavedb{mybib}{tylee_db.txt}
-%\DTLloaddb{mybib}{mybib_db.txt}
-\DTLsort{Year=descending,Month=descending}{mybib}
+    \DTLsettabseparator
+    \DTLsavedb{mybib}{tylee_db.txt}
+    \DTLsort{Year=descending,Month=descending}{mybib}
 \fi
 
 \begin{center}
@@ -287,15 +286,18 @@ Tel: 202-994-8710, \quad Fax: 202-994-0238, \quad Email: \url{tylee@gwu.edu}
 
 %\vspace*{0.02cm}
 
-\clearpage\newpage
+%\clearpage\newpage
 % 1760928
-\subsection*{Research Grants \textnormal{\normalsize (total award: over \$4.58M)}}
+\subsection*{Research Grants \textnormal{\normalsize (total award: over \$5.32M)}}
 \setlength{\tabcolsep}{0cm}
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X X}%
 %>{\setlength{\hsize}{15.0cm}}X
 %>{\hfill}X}
 & NSF CNS Computer and Network Systems \href{http://www.nsf.gov/awardsearch/showAward?AWD_ID=1837382}{\#1837382} \textit{(\$1M, Co-PI)}\hfill 2019-2022  \\
 & \quad\textit{CPS: Medium: Edge-Cloud Support for Predictable, Global Situational-Awareness for Autonomous Vehicle} \vspace*{0.08cm}\\
+%
+& US Naval Academy \textit{(\$72K, PI)}\hfill 2019-2021  \\
+& \quad\textit{Autonomous Landing on a Ship} \vspace*{0.08cm}\\
 %
     & Air Force Office of Scientific Research (AFOSR)  \textit{(\$600K, PI)}\hfill 2018-2021  \\
 & \quad\textit{Uncertainty Quantification, Estimation, and Optimal Control for Stochastic Hybrid Systems on a Manifold} \vspace*{0.08cm}\\
@@ -347,7 +349,7 @@ Interdisciplinary Research Grant \textit{(PI)}
 \end{tabularx}
 
 %\clearpage\newpage
-\vspace*{1cm}
+\vspace*{0.2cm}
 
 \subsection*{Honor \& Awards}
 \setlength{\tabcolsep}{0cm}
@@ -437,7 +439,7 @@ Total & & & \arabic{nP_total}\\
 \bottomrule
 \end{tabularx}
 \begin{tablenotes}
-\item (Citation:3339,\; h-index=29, \; i10-index=51)
+\item (Citation:4481,\; h-index=33, \; i10-index=62 as of June 2020)
 \end{tablenotes}
 \end{threeparttable}
 \end{center}
@@ -487,6 +489,7 @@ Total & & & \arabic{nP_total}\\
 \fi
 
 \vspace*{0.3cm}
+\clearpage\newpage
 
 {\noindent\textbf{Computational Geometric Optimization}}
 \ifdatabase
@@ -506,7 +509,6 @@ Total & & & \arabic{nP_total}\\
 \vspace*{0.3cm}
 
 {\noindent\textbf{Computational Geometric Mechanics}}
-
 \ifdatabase
 \begin{enumerate}
 \ifdatabasenew\item tmp\fi
@@ -573,103 +575,101 @@ Total & & & \arabic{nP_total}\\
 \vspace*{0.4cm}
 
 \subsection*{Open-Source Software Development}
-    \begin{enumerate}
-\renewcommand{\labelenumi}{[\arabic{enumi}]}
-        \item T. Lee. \textit{Fast Fourier Transform on SO(3)}, \href{https://fdcl-gwu.github.io/FFTSO3}{\footnotesize\texttt{https://fdcl-gwu.github.io/FFTSO3}}, 2018
-        \item T. Lee. \textit{Matrix Fisher Distribution on SO(3)}, \href{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}{\footnotesize\texttt{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}}, 2018
-        \item T. Lee. \textit{Geometric Formulations for the Flapping Wing UAV}, \href{https://github.com/fdcl-gwu/FWUAV}{\footnotesize\texttt{https://github.com/fdcl-gwu/FWUAV}}, 2019
-    \end{enumerate}
+\begin{enumerate}
+    \renewcommand{\labelenumi}{[\arabic{enumi}]}
+\item T. Lee. \textit{Fast Fourier Transform on SO(3)}, \href{https://fdcl-gwu.github.io/FFTSO3}{\footnotesize\texttt{https://fdcl-gwu.github.io/FFTSO3}}, 2018
+\item T. Lee. \textit{Matrix Fisher Distribution on SO(3)}, \href{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}{\footnotesize\texttt{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}}, 2018
+\item T. Lee. \textit{Geometric Formulations for the Flapping Wing UAV}, \href{https://github.com/fdcl-gwu/FWUAV}{\footnotesize\texttt{https://github.com/fdcl-gwu/FWUAV}}, 2019
+\end{enumerate}
 
-\vspace*{0.4cm}
+    \vspace*{0.4cm}
 
 
 
 \subsection*{Invited Talks}
-\setlength{\tabcolsep}{0cm}
-\begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
->{\setlength{\hsize}{14.3cm}}X%
->{\hfill}X}
+\begin{enumerate}[itemsep=2pt,parsep=2pt]
+    \renewcommand{\labelenumi}{[\arabic{enumi}]}
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} \hfill Oct 2019\\
+    Rutgers University, New Brunswick NJ
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Oct 2018\\
-& {University of Maryland}, College Park MD\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Oct 2019\\
+    {University of Maryland}, College Park MD
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Apr 2018\\
-& {Virginia Tech}, Blacksburg VA\vspace*{0.1cm}\\
+\item \textit{Stochastic Hybrid Systems on a Manifold}   \hfill Aug 2019 \\
+    Air Force Office of Scientific Research, Arlington VA
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Mar 2018\\
-& {University of Alabama, Huntsville}, Huntsville AL\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Oct 2018\\
+    {University of Maryland}, College Park MD
 
-& \textit{Intrinsic Formulation of Bayesian Estimation on a Lie Group} & Aug 2017\\
-& {Electrical Engineering, KAIST}, Daejeon, South Korea\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Apr 2018\\
+    {Virginia Tech}, Blacksburg VA
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Aug 2017\\
-& {Aerospace Engineering, KAIST}, Daejeon, South Korea\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Mar 2018\\
+    {University of Alabama, Huntsville}, Huntsville AL
 
+\item \textit{Intrinsic Formulation of Bayesian Estimation on a Lie Group}  \hfill Aug 2017\\
+    {Electrical Engineering, KAIST}, Daejeon, South Korea
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Mar 2016\\
-& {University of Michigan}, Ann Arbor, MI\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Aug 2017\\
+    {Aerospace Engineering, KAIST}, Daejeon, South Korea
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Mar 2016\\
-& {MAE Seminar Series, Syracuse University}, Syracuse, NY\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Mar 2016\\
+    {University of Michigan}, Ann Arbor, MI
 
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Mar 2016\\
+    {MAE Seminar Series, Syracuse University}, Syracuse, NY
 
-& \textit{Global Formulations of Stochastic Analysis on Manifolds} & Aug 2015\\
-& {NSF Workshop on Learning, Perception and Control in Robots and Humans}, Arlington VA\vspace*{0.1cm}\\
+\item \textit{Global Formulations of Stochastic Analysis on Manifolds}  \hfill Aug 2015\\
+    {NSF Workshop on Learning, Perception and Control in Robots and Humans}, Arlington VA
 
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Sep 2014\\
+    {MAE Seminar Series, Seoul National University}, South Korea
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Sep 2014\\
-& {MAE Seminar Series, Seoul National University}, South Korea\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Sep 2014\\
+    {Department Seminar Series, Yonsei University}, South Korea
 
+\item \textit{Stochastic Optimal Motion Planning and Estimation for the Attitude Kinematics on SO(3)}  \hfill Mar 2014\\
+    {AMS Eastern Sectional Meeting, Special Session on Mechanics and Control}, Baltimore MD
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} & Sep 2014\\
-& {Department Seminar Series, Yonsei University}, South Korea\vspace*{0.1cm}\\
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Jul 2013\\
+    {AFRL Seminar Series}, Kirtland AFB, Albuquerque NM
 
+\item \textit{Computational Geometric Mechanics and Controls for Complex Aerospace Systems}  \hfill Mar 2013\\
+    {ECE Seminar Series}, University of Virginia
 
-& \textit{Stochastic Optimal Motion Planning and Estimation for the Attitude Kinematics on SO(3)} & Mar 2014\\
-& {AMS Eastern Sectional Meeting, Special Session on Mechanics and Control}, Baltimore MD\vspace*{0.1cm}\\
+\item \textit{Computational Geometric Mechanics and Control on Nonlinear Manifolds}  \hfill Nov 2011\\
+    {Mathematics Colloquium Series}, University of Maryland Baltimore County
 
+\item \textit{Geometric Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Apr 2011\\
+    {Physical Sciences Department Colloquium Series}, Embry-Riddle Aeronautical University
 
-& \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems
-} & Jul 2013\\
-& {AFRL Seminar Series}, Kirtland AFB, Albuquerque NM\vspace*{0.1cm}\\
+\item \textit{Geometric Control on Nonlinear Manifolds for Complex Aerospace Systems}  \hfill Mar 2011\\
+    {MAE Seminar}, George Washington University
 
+\item \textit{Discrete Geometric Mechanics}  \hfill Dec 2010\\
+    {Young Researchers Workshop on Geometry, Mechanics and Control}, University of La Laguna, Spain
 
-& \textit{Computational Geometric Mechanics and Controls for Complex Aerospace Systems
-} & Mar 2013\\
-& {ECE Seminar Series}, University of Virginia\vspace*{0.1cm}\\
+\item \textit{Computational Geometric Mechanics and Control of Multibody Systems}  \hfill May 2010\\
+    {University of Michigan}
 
-& \textit{Computational Geometric Mechanics and Control on Nonlinear Manifolds
-} & Nov 2011\\
-& {Mathematics Colloquium Series}, University of Maryland Baltimore County\vspace*{0.1cm}\\
+\item \textit{Lie Group Variational Integrator for Dynamics and Control of Multibody Systems}  \hfill Apr 2010\\
+    {Structured Integrators Workshop}, University of California, San Diego
 
-& \textit{Geometric Control on Nonlinear Manifolds
-for Complex Aerospace Systems
-} & Apr 2011\\
-& {Physical Sciences Department Colloquium Series}, Embry-Riddle Aeronautical University\vspace*{0.1cm}\\
+\item \textit{Computational Geometric Mechanics and Control of Rigid Bodies}  \hfill Feb 2008\\
+    {Florida Institute of Technology}, Melbourne, Florida
 
-& \textit{Geometric Control on Nonlinear Manifolds
-for Complex Aerospace Systems
-} & Mar 2011\\
-& {MAE Seminar}, George Washington University\vspace*{0.1cm}\\
+\item \textit{Computational Geometric Mechanics, Control, and Estimation of Rigid Bodies on Lie Groups}  \hfill Feb 2007\\
+    {SIAM Conference on Computational Science and Engineering}, Costa Mesa, California
 
-& \textit{Discrete Geometric Mechanics} & Dec 2010\\
-& {Young Researchers Workshop on Geometry, Mechanics and Control}, University of La Laguna, Spain\vspace*{0.1cm}\\
-& \textit{Computational Geometric Mechanics and Control of Multibody Systems} & May 2010\\
-& {University of Michigan}\vspace*{0.1cm}\\
-& \textit{Lie Group Variational Integrator for Dynamics and Control of Multibody Systems} & Apr 2010\\
-& {Structured Integrators Workshop}, University of California, San Diego\vspace*{0.1cm}\\
-& \textit{Computational Geometric Mechanics and Control of Rigid Bodies} & Feb 2008\\
-& {Florida Institute of Technology}, Melbourne, Florida\vspace*{0.1cm}\\
-& \textit{Computational Geometric Mechanics, Control, and Estimation of Rigid Bodies on Lie Groups} & Feb 2007\\
-& {SIAM Conference on Computational Science and Engineering}, Costa Mesa, California\vspace*{0.1cm}\\
-& \textit{Optimal Control of a Rigid Body using Geometrically Exact Computations on Lie Groups} & Oct 2006\\
-& {Flight Dynamics and Control Seminar}, University of Michigan\vspace*{0.1cm}\\
-& \textit{Attitude Maneuvers of a Rigid Spacecraft in a Circular Orbit} & Nov 2005\\
-& {Flight Dynamics and Control Seminar}, University of Michigan\vspace*{0.1cm}\\
-& \textit{Lie Group Variational Integrator for the Attitude dynamics of a Rigid body} & Feb 2005\\
-& {Flight Dynamics and Control Seminar}, University of Michigan
-\end{tabularx}
+\item \textit{Optimal Control of a Rigid Body using Geometrically Exact Computations on Lie Groups}  \hfill Oct 2006\\
+    {Flight Dynamics and Control Seminar}, University of Michigan
 
+\item \textit{Attitude Maneuvers of a Rigid Spacecraft in a Circular Orbit}  \hfill Nov 2005\\
+    {Flight Dynamics and Control Seminar}, University of Michigan
+
+\item \textit{Lie Group Variational Integrator for the Attitude dynamics of a Rigid body}  \hfill Feb 2005\\
+    {Flight Dynamics and Control Seminar}, University of Michigan
+\end{enumerate}
 
 \vspace*{0.2cm}
 
@@ -680,31 +680,28 @@ for Complex Aerospace Systems
 >{\setlength{\hsize}{14.3cm}}X%
 >{\hfill}X}
 
-& \bfi{Senior Editor}:\quad Conference Editorial Board \quad  & 2018\\
-& 2018 International Conference on Ubiquitous Robotics & \\[0.2cm]
+& \bfi{Senior Editor}:\quad Conference Editorial Board \quad  & 2018, 2019\\
+& International Conference on Ubiquitous Robotics & \\[0.2cm]
 
-& \bfi{Committee Member}:\quad Technical Program Committee \quad  & 2018\\
-& 2018 American Control Conference & \\[0.2cm]
-
-& \bfi{Committee Member}:\quad Technical Program Committee \quad  & 2016\\
-& 2016 American Control Conference & \\[0.2cm]
+& \bfi{Committee Member}:\quad Technical Program Committee \quad  & 2016, 2018\\
+& American Control Conference & \\[0.2cm]
 
 &\bfi{Associate Editor}: Conference Editorial Board, IEEE Robotics and Automation Society & Dec 2014-present \\
 & 2015, 2016, 2017, 2018, 2019 IEEE Conference on Robotics and Automation& \\[0.2cm]
 
-&\bfi{Associate Editor}: Conference Editorial Board, IEEE Control System Society & Jun 2013-present \\
-& 2014, 2015, 2016, 2017, 2018, 2019 American Control Conference& \\
-& 2014, 2015, 2016, 2017, 2018, 2019 IEEE Conference on Decision and Control& \\[0.2cm]
+&\bfi{Associate Editor}: Conference Editorial Board, IEEE Control System Society & Jun 2013-May 2020 \\
+& 2014, 2015, 2016, 2017, 2018, 2019, 2020 American Control Conference& \\
+& 2014, 2015, 2016, 2017, 2018, 2019, 2020 IEEE Conference on Decision and Control& \\[0.2cm]
 
-& \bfi{Committee Member}:\quad Program Committee, Conference Organization Board\quad  & Oct 2014-Sep 2015\\
-& 2015 IMA Conference on Mathematics on Robotics & \\[0.2cm]
+& \bfi{Committee Member}:\quad Program Committee, Conference Organization Board\quad  & 2015\\
+& IMA Conference on Mathematics on Robotics & \\[0.2cm]
 
 % &\bfi{Associate Editor}: Journal on Automation and Control Engineering & Mar 2013-present 
 \end{tabularx}
 
 \vspace*{0.2cm}
 
-
+\clearpage\newpage
 \subsection*{Conference Organization and Service}
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
 >{\setlength{\hsize}{14.3cm}}X%
@@ -756,6 +753,7 @@ for Complex Aerospace Systems
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
 >{\setlength{\hsize}{17.3cm}}X}
 
+&\bfi{Review Panelist}: NASA \hfill 2019\vspace*{0.08cm}\\
 
 &\bfi{Review Panelist}: National Science Foundation (NSF) \hfill 2013, 2015\vspace*{0.08cm}\\
 
@@ -821,6 +819,8 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
 >{\setlength{\hsize}{17.3cm}}X}
 
+&\bfi{Committee Chair}: Faculty Search Committee, Mechanical and Aerospace Engineering, GWU\hfill 2019-2020\vspace*{0.08cm}\\
+
 &\bfi{Committee Member}: Finance Committee, School of Engineering and Applied Science, GWU\hfill 2018-2019\vspace*{0.08cm}\\
 
 &\bfi{Committee Member}: Faculty Search Committee, Mechanical and Aerospace Engineering, GWU\hfill 2018-2019\vspace*{0.08cm}\\
@@ -860,18 +860,19 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 & Dr. Kuya Takami: Autonomous aerial exploration\hfill 2016-2017\\
 & & Dr. Daewon Lee: Adaptive control of autonomous load transportation\hfill 2012-2014\\[0.2cm]
 & Doctoral Students 
-  & Harshvardhan Uppaluru : urban situation awareness \hfill 2019-present\\
-  & & Zichao Hou : Autonomous cancer treatment\hfill 2019-present\\
-  & &Weixin Wang : Hybrid systems on a manifold \hfill 2019-present\\
+  %& Harshvardhan Uppaluru : urban situation awareness \hfill 2019-present\\
+  & Zichao Hou : Autonomous cancer treatment\hfill 2019-present\\
+& & Weixin Wang : Hybrid systems on a manifold \hfill 2019-present\\
 & & Kanishke Gamagedar : Autonomous landing on a ship\hfill 2018-present\\
 & & Mahdis Bisheban : Geometric control of quadrotors under wind\hfill 2015-2018\\
 & & Shankar Kulumani : Low thrust optimal orbital maneuvers\hfill 2014-2018\\
 & & Evan Kaufman : Autonomous aerial exploration\hfill 2012-2018\\
-& & Dr. Tse-Huai Wu : Geometric control and estimation on SO(3)\hfill 2013-2015\\
-& & Dr. Farhad Goodarzi : Geometric control of quadrotor UAV\hfill 2011-2015
+& & Tse-Huai Wu : Geometric control and estimation on SO(3)\hfill 2013-2015\\
+& & Farhad Goodarzi : Geometric control of quadrotor UAV\hfill 2011-2015
 \\[0.2cm]
 & Masters Students
-  & Zichao Hou : Autonomous exploration of Mars\hfill 2018-2019\\
+  & Tejaswi K. C. : Flapping wing UAV\hfill 2019-2021\\
+& & Zichao Hou : Autonomous exploration of Mars\hfill 2018-2019\\
 & & Kanishke Gamagedar : Development of telemetry for ship air wakes\hfill 2016-2017\\
 & & Kalpesh Patil : Development of telemetry for ship air wakes\hfill 2015-2017\\
 & & Kiren Caldwell  : Outdoor flight of quadrotor UAV via differential GPS \hfill 2014-2015\\
@@ -879,9 +880,9 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 & & Tse-Huai Wu : Vision-based spacecraft formation control \hfill 2011-2013 
 \\[0.2cm]
 & Undergraduate Students 
-  & Allegra Farrar : Interaction between UAV and human \hfill 2018-present\\
-& & Noah Curtiss : Development of multirotor UAV \hfill 2017-present\\
-& & Carolyn Fisk : Cubesat mission analysis and design \hfill 2017-present\\
+  & Allegra Farrar : Interaction between UAV and human \hfill 2018-2020\\
+& & Noah Curtiss : Development of multirotor UAV \hfill 2017-2019\\
+& & Carolyn Fisk : Cubesat mission analysis and design \hfill 2017-2019\\
 & & Chris Poole : Development of multirotor UAV \hfill 2015-2018\\
 & & Kiren Caldwell : Development of user interface for UAV control \hfill 2013-2014\\
 & & John Dougherty:  Development of i2c interface circuit board\hfill 2012-2013\\
@@ -998,9 +999,9 @@ X}
 %>{\setlength{\hsize}{12cm}}X
 %>{\hfill}X}
 &\textit{MAE3145: Orbital Mechanics and Space Dynamics} \hfill Fall 2011-2016\\
-&\textit{MAE4182: Electromechanical Control Systems} \hfill Fall 2018\\
+&\textit{MAE4182: Electromechanical Control Systems} \hfill Fall 2018,2019\\
 &\textit{MAE6254: Applied Nonlinear Control} \hfill Spring 2012,2014,2016,2018,2019\\
-&\textit{MAE6292: Special Topic: Optimal Control and Estimation} \hfill Spring 2015\\
+&\textit{MAE6292: Special Topic: Optimal Control and Estimation} \hfill Spring 2015, 2020\\
 &\textit{MAE6277: Spacecraft Attitude Control} \hfill Spring 2013, 2017\\
 &\textit{MAE6246: Electromechanical Control Systems} \hfill Spring 2013, Fall 2013-2016\\
 &Department of Mechanical and Aerospace Engineering, The George Washington University\vspace*{0.30cm}\\
