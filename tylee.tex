@@ -232,6 +232,7 @@ Tel: 202-994-8710, \quad Fax: 202-994-0238, \quad Email: \url{tylee@gwu.edu}
 >{\setlength{\hsize}{10.8cm}}X
 >{\hfill}X}
 & Professor   & Department of Mechanical and Aerospace Engineering & 2020-present\\
+& & Department of Computer Science (\textit{courtesy appointment, pending})\\
 &         & {\fontshape{sc}\selectfont The George Washington University}, Washington DC  \vspace*{0.10cm}\\
 %
 & Associate Professor   & Department of Mechanical and Aerospace Engineering & 2015-2020 \\
@@ -260,15 +261,18 @@ Tel: 202-994-8710, \quad Fax: 202-994-0238, \quad Email: \url{tylee@gwu.edu}
 {\setlength{\leftmargin}{1.0cm}\setlength{\itemindent}{-0.5cm}
 \setlength{\parsep}{0cm}\setlength{\itemsep}{0.12cm}\setlength{\parskip}{0cm}\setlength{\topsep}{0cm}\setlength{\partopsep}{0cm}}
 
-\item \textbf{Geometric Control on Manifolds}: Global, intrinsic formulation of control systems on nonlinear manifold 
+\item \textbf{Geometric Mechanics and Control}: Global, intrinsic formulation of Lagrangian/Hamiltonian mechanics, optimization, and control systems on nonlinear manifold 
 
-\item \textbf{Aerial Robotics}: Geometric mechanics, control, optimization, planning, estimation, vision-based perception for autonomous aerial systems, including multirotor UAV and micro flapping-wing UAV
+\item \textbf{Geometric Machine Learning}: Reinforcement learning, imitation learning that respect the underlying structures of configuration manifold and symmetry of dynamic systems
 
-\item \textbf{Flight Experiments}: Indoor/outdoor flight experiments for agile maneuvering, aerial transportation, autonomous landing on a ship, and aerial mapping; Design and development of flight software and hardware for autonomous aerial systems 
+\item \textbf{Aerial Robotics}: Dynamics, control, and vision-based perception for autonomous aerial systems, including multirotor UAV and micro flapping-wing UAV; 
+Indoor/outdoor flight experiments for agile maneuvering, aerial transportation, autonomous landing on a ship, and aerial mapping
 
-\item \textbf{Stochastic Analysis on Manifolds}: Uncertainty propagation and Bayesian estimation on a manifold
+\item \textbf{Stochastic Analysis on Manifolds}: Uncertainty propagation and Bayesian estimation on nonlinear manifold
 
 \item \textbf{Geometric Numerical Integration}: Structure-preserving numerical integration schemes for Hamiltonian systems
+
+\item \textbf{Biomedical Engineering}: Data-driven autonomous cancer treatment with cold atmospheric plasma
 
 
 \vspace*{0.2cm}
@@ -294,16 +298,25 @@ Tel: 202-994-8710, \quad Fax: 202-994-0238, \quad Email: \url{tylee@gwu.edu}
 
 %\clearpage\newpage
 % 1760928
-\subsection*{Research Grants \textnormal{\normalsize (total award:  +\$5.5M)}}
+\subsection*{Research Grants}% \textnormal{\normalsize (total award:  \$13.5M+)}}
 \setlength{\tabcolsep}{0cm}
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X X}%
 %>{\setlength{\hsize}{15.0cm}}X
 %>{\hfill}X}
-& NSF CNS Computer and Network Systems \href{http://www.nsf.gov/awardsearch/showAward?AWD_ID=1837382}{\#1837382} \textit{(\$1M, Co-PI)}\hfill 2019-2022  \\
-& \quad\textit{CPS: Medium: Edge-Cloud Support for Predictable, Global Situational-Awareness for Autonomous Vehicle} \vspace*{0.08cm}\\
+& \href{https://www.defense.gov/News/Releases/Release/Article/3336228/fiscal-year-2023-research-funding-awards/}{AFOSR/DoD Multidisciplinary University Research Initiative (MURI)} \textit{(\$7.5M, Lead-PI)}\hfill 2023-2028\\
+& \quad\textit{Unified Large-Scale Theoretical and Computational Frameworks for Invariance and Composition of Open Hybrid Dynamical Systems} \vspace*{0.08cm}\\
 %
-& US Naval Academy \textit{(\$142K, PI)}\hfill 2019-2023  \\
+& Office of Naval Research (ONR) Science of AI \textit{(\$1.5M, co-PI)}\hfill 2023-2027 \\
+& \quad\textit{CHASE: Cultivating Human-AI Synergy via Decentralized Elicitation and Learning} \vspace*{0.08cm}\\
+%
+& Office of Naval Research (ONR)  \textit{(\$12M, co-PI)}\hfill 2023-2028 \\
+& \quad\textit{CoNEP: Consortium on Naval Enterprise Pathways} \vspace*{0.08cm}\\
+%
+& Naval Air System (NAVAIR) / US Naval Academy (USNA) \textit{(\$190K, PI)}\hfill 2019-2024  \\
 & \quad\textit{Autonomous Landing on a Ship} \vspace*{0.08cm}\\
+%
+& NSF CNS Computer and Network Systems \href{http://www.nsf.gov/awardsearch/showAward?AWD_ID=1837382}{\#1837382} \textit{(\$1M, co-PI)}\hfill 2019-2022  \\
+& \quad\textit{CPS: Medium: Edge-Cloud Support for Predictable, Global Situational-Awareness for Autonomous Vehicle} \vspace*{0.08cm}\\
 %
     & Air Force Office of Scientific Research (AFOSR)  \textit{(\$600K, PI)}\hfill 2018-2022  \\
 & \quad\textit{Uncertainty Quantification, Estimation, and Optimal Control for Stochastic Hybrid Systems on a Manifold} \vspace*{0.08cm}\\
@@ -479,7 +492,7 @@ Resources Development, Korea \hfill 2004
 
 \vspace*{1.cm}
 
-{\noindent\textbf{Computational Geometric Control}}
+{\noindent\textbf{Geometric Controls}}
 \ifdatabase
 \begin{enumerate}
 \ifdatabasenew\item tmp\fi
@@ -495,7 +508,7 @@ Resources Development, Korea \hfill 2004
 \fi
 
 %\vspace*{0.3cm}
-\clearpage\newpage
+%\clearpage\newpage
 
 {\noindent\textbf{Computational Geometric Optimization}}
 \ifdatabase
@@ -583,9 +596,14 @@ Resources Development, Korea \hfill 2004
 \subsection*{Open-Source Software Development}
 \begin{enumerate}
     \renewcommand{\labelenumi}{[\arabic{enumi}]}
-\item T. Lee. \textit{Fast Fourier Transform on SO(3)}, \href{https://fdcl-gwu.github.io/FFTSO3}{\footnotesize\texttt{https://fdcl-gwu.github.io/FFTSO3}}, 2018
-\item T. Lee. \textit{Matrix Fisher Distribution on SO(3)}, \href{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}{\footnotesize\texttt{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}}, 2018
-\item T. Lee. \textit{Geometric Formulations for the Flapping Wing UAV}, \href{https://github.com/fdcl-gwu/FWUAV}{\footnotesize\texttt{https://github.com/fdcl-gwu/FWUAV}}, 2019
+    
+    \item \textit{Control Systems Design with Python}, \href{https://mae4182.readthedocs.io}{\footnotesize{\texttt{https://mae4182.readthedocs.io}}}
+    \item \textit{Pose Estimation with ArUco markers}, \href{https://github.com/fdcl-gwu/aruco-markers}{\footnotesize{\texttt{https://github.com/fdcl-gwu/aruco-markers}}}
+    \item \textit{Python-Gazebo Environment for UAV with Geometric Control}, \href{https://github.com/fdcl-gwu/uav_simulator}{\footnotesize{\texttt{https://github.com/fdcl-gwu/uav\_simulator}}}
+    \item \textit{OpenAI Gym Environment for Quadrotor UAV}, \href{https://github.com/fdcl-gwu/gym-rotor}{\footnotesize{\texttt{https://github.com/fdcl-gwu/gym-rotor}}}
+    \item \textit{Fast Fourier Transform on SO(3)}, \href{https://fdcl-gwu.github.io/FFTSO3}{\footnotesize\texttt{https://fdcl-gwu.github.io/FFTSO3}}
+    \item \textit{Matrix Fisher Distribution on SO(3)}, \href{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}{\footnotesize\texttt{https://github.com/tylee-fdcl/Matrix-Fisher-Distribution}}
+    \item \textit{Geometric Formulations for the Flapping Wing UAV}, \href{https://github.com/fdcl-gwu/FWUAV}{\footnotesize\texttt{https://github.com/fdcl-gwu/FWUAV}}
 \end{enumerate}
 
     \vspace*{0.4cm}
@@ -595,6 +613,10 @@ Resources Development, Korea \hfill 2004
 \subsection*{Invited Talks}
 \begin{enumerate}[itemsep=2pt,parsep=2pt]
     \renewcommand{\labelenumi}{[\arabic{enumi}]}
+\item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Systems} \hfill (Jun 2024)\\
+    \textbf{Keynote} (invited)\\
+    IFAC Workshop on Lagrangian and Hamiltonian Methods for Nonlinear Control, Besancon, France
+
 \item \textit{Geometric Mechanics and Control on Nonlinear Manifolds for Complex Aerospace Systems} \hfill Aug 2022\\
     Chungnam National University
 
@@ -695,9 +717,11 @@ Resources Development, Korea \hfill 2004
 >{\setlength{\hsize}{14.3cm}}X%
 >{\hfill}X}
 
-&\bfi{Associate Editor}: IEEE Transactions on Control Systems Technology & 2023- \\[0.2cm]
+&\bfi{Associate Editor}: IEEE Transactions on Control Systems Technology & 2023-present \\[0.2cm]
 
-& \bfi{Senior Editor}:\quad Conference Editorial Board \quad  & 2018-2022\\
+&\bfi{Associate Editor}: IEEE Transactions on Aerospace and Electronic Systems & 2023-present \\[0.2cm]
+
+& \bfi{Senior Editor}:\quad Conference Editorial Board \quad  & 2018-2023\\
 & International Conference on Ubiquitous Robotics & \\[0.2cm]
 
 & \bfi{Committee Member}:\quad Technical Program Committee \quad  & 2016, 2018\\
@@ -770,9 +794,9 @@ Resources Development, Korea \hfill 2004
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
 >{\setlength{\hsize}{17.3cm}}X}
 
-&\bfi{Review Panelist}: NASA \hfill 2019\vspace*{0.08cm}\\
+&\bfi{Review Panelist}: NASA\\[0.2cm]% \hfill 2019\vspace*{0.08cm}\\
 
-&\bfi{Review Panelist}: National Science Foundation (NSF) \hfill 2013, 2015\vspace*{0.08cm}\\
+&\bfi{Review Panelist}: National Science Foundation (NSF)\\[0.2cm]% \hfill 2013, 2015\vspace*{0.08cm}\\
 
 &\bfi{Reviewer}: National Science Foundation (NSF); 
 Air Force Office of Scientific Research (AFOSR);
@@ -837,11 +861,17 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X%
 >{\setlength{\hsize}{17.3cm}}X}
 
-&\bfi{Committee Member}: Personnel Subcommittee, School of Engineering and Applied Science, GWU\hfill 2021-2022\vspace*{0.08cm}\\
+&\bfi{Committee Member}: Ad-hoc Committee for MEng in ML/AI, School of Engineering and Applied Science, GWU\hfill 2023-present\vspace*{0.08cm}\\
 
-&\bfi{Committee Chair}: Personnel Subcommittee, Mechanical and Aerospace Engineering, GWU\hfill 2021-2022\vspace*{0.08cm}\\
+&\bfi{Committee Member}: Finance Committee, School of Engineering and Applied Science, GWU\hfill 2023-present\vspace*{0.08cm}\\
 
-&\bfi{Committee Member}: Graduate Curriculum Committee, Mechanical and Aerospace Engineering, GWU\hfill 2021-2022\vspace*{0.08cm}\\
+&\bfi{Committee Member}: Personnel Subcommittee, School of Engineering and Applied Science, GWU\hfill 2021-2023\vspace*{0.08cm}\\
+
+&\bfi{Committee Chair}: Personnel Subcommittee, Mechanical and Aerospace Engineering, GWU\hfill 2021-present\vspace*{0.08cm}\\
+
+&\bfi{Committee Chair}: Lab Committee, Mechanical and Aerospace Engineering, GWU\hfill 2021-present\vspace*{0.08cm}\\
+
+&\bfi{Committee Member}: Graduate Curriculum Committee, Mechanical and Aerospace Engineering, GWU\hfill 2021-2024\vspace*{0.08cm}\\
 
 &\bfi{Committee Chair}: Faculty Search Committee, Mechanical and Aerospace Engineering, GWU\hfill 2019-2020\vspace*{0.08cm}\\
 
@@ -865,8 +895,12 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 \subsection*{Dissertation Directed}
 \begin{enumerate}
 \renewcommand{\labelenumi}{[\arabic{enumi}]}
+\item Tejasswi C., \textit{Data-Driven Controls of a Flapping Wing Unmanned Aerial Vehicle Inspired by Monarch Butterfly}, Ph.D Dissertation, The George Washington University, November 2023 (pending)
+
+\item Z. Hou, \textit{Adaptive Cold Atmospheric Plasma Cancer Treatment with Real-Time Electrochemical Impedance Spectroscopy}, Ph.D Dissertation, The George Washington University, November 2023 (pending)
+
 \item W. Wang, \textit{Geometric Formulation of Uncertainties and Estimation for Three-Dimensional Rotations}, Ph.D Dissertation, The George Washington University, 2022
-\item K. Gamagedara, \textit{Geometric Formulation of Uncertainties and Estimation for Three-Dimensional Rotations}, Ph.D Dissertation, The George Washington University, 2022
+\item K. Gamagedara, \textit{Geometric Control and Estimation for Autonomous UAVs in Ocean Environments}, Ph.D Dissertation, The George Washington University, 2022
 \item M. Bisheban, \textit{Geometric Estimation and Control of Quadrotor UAVs in Wind Fields}, Ph.D Dissertation, The George Washington University, 2018
 \item E. Kaufman, \textit{Multi-Robot Probabilistic Mapping and Exploration}, Ph.D Dissertation, The George Washington University, 2018
 \item S. Kulumani, \textit{Geometric Mechanics and Control for Small Body Missions}, Ph.D Dissertation, The George Washington University, 2018
@@ -909,7 +943,8 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 & & Tse-Huai Wu : Vision-based spacecraft formation control \hfill 2011-2013 
 \\[0.2cm]
 & Undergraduate Students 
-  & Allegra Farrar : Interaction between UAV and human \hfill 2018-2020\\
+ & Karl Simon : Vision-based UAV control \hfill 2022-present\\
+& & Allegra Farrar : Interaction between UAV and human \hfill 2018-2020\\
 & & Noah Curtiss : Development of multirotor UAV \hfill 2017-2019\\
 & & Carolyn Fisk : Cubesat mission analysis and design \hfill 2017-2019\\
 & & Chris Poole : Development of multirotor UAV \hfill 2015-2018\\
@@ -918,7 +953,9 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 & & Ryan Mossbarger: Development of thrust stand \hfill 2012-2013 
 \\[0.2cm]
 & Visiting Scholar
-& Prof. S. Kim (CNU South Korea) : Autonomous aerospace system \hfill 2019-2020\\
+ & Charles Joyner (Stanford) : Vision-based UAV control \hfill 2023\\
+& & Nathan Park (McLean High) : UAV design and development \hfill 2023\\
+& & Prof. S. Kim (CNU South Korea) : Autonomous aerospace system \hfill 2019-2020\\
 & & Harsh Sharmar (VaTech) : Geometric numerical integration \hfill 2018, 2019\\[0.2cm]
 %& Thesis Committee
   %& Mohammad Goli (Ph.D): Vehicle Platooning\hfill Mar 2017\\
@@ -949,6 +986,8 @@ IMA Conference on Mathematics of Robotics\vspace*{0.08cm}\\
 \begin{tabularx}{\textwidth}{>{\setlength{\hsize}{0.5cm}}X X}%
 %>{\setlength{\hsize}{15.0cm}}X
 %>{\hfill}X}
+& \textit{DoD SMART Scholarship}: (Karl Simon)\hfill 2022\\[0.2cm]
+
 & \textit{Most Innovative/Creative Project Award}: (Weixin Wang)\hfill 2021\\
 & {Matrix Fisher--Gaussian Distribution for Spacecraft Attitude Estimation}\\
 & The 11th Annual Student Competition, Society for Satellite Professional Internationals (SSPI)\\[0.2cm]
@@ -1034,9 +1073,9 @@ X}
 %>{\setlength{\hsize}{12cm}}X
 %>{\hfill}X}
 &\textit{MAE3145: Orbital Mechanics and Space Dynamics} \hfill Fall 2011-2016\\
-&\textit{MAE4182: Electromechanical Control Systems} \hfill Fall 2018-2021\\
-&\textit{MAE6254: Applied Nonlinear Control} \hfill Spring 2012,2014,2016,2018,2019\\
-&\textit{MAE6292: Special Topic: Robotics Vision and Perception} \hfill Spring 2021, 2022\\
+&\textit{MAE4182: Electromechanical Control Systems} \hfill Fall 2018-2023\\
+&\textit{MAE6254: Applied Nonlinear Control} \hfill Spring 2012,2014,2016,2018,2019,2023\\
+&\textit{MAE6292: Special Topic: Robotics Vision and Perception} \hfill Spring 2021, 2022, 2024\\
 &\textit{MAE6292: Special Topic: Optimal Control and Estimation} \hfill Spring 2015, 2020\\
 &\textit{MAE6277: Spacecraft Attitude Control} \hfill Spring 2013, 2017\\
 &\textit{MAE6246: Electromechanical Control Systems (Linear Systems)} \hfill Spring 2013, Fall 2013-2016\\
